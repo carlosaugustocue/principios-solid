@@ -1,0 +1,27 @@
+# Compiled class files
+*.class
+
+# Output folder
+out/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Gradle
+.gradle/
+build/
+
+# Maven
+target/
+
+# Environment
+.env
+.env.local
