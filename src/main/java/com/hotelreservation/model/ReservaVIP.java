@@ -1,6 +1,8 @@
 package com.hotelreservation.model;
 
 import com.hotelreservation.payment.MetodoPago;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.List;
  * SRP: Responsabilidad única de manejar reservas VIP con beneficios especiales.
  */
 public class ReservaVIP extends Reserva {
+    private static final Logger logger = LoggerFactory.getLogger(ReservaVIP.class);
     private static final double DESCUENTO_VIP = 0.15; // 15% de descuento
     private boolean desayunoIncluido;
     private boolean servicioHabitacion24h;
@@ -39,7 +42,7 @@ public class ReservaVIP extends Reserva {
     @Override
     public void confirmar() {
         super.confirmar();
-        System.out.println("Beneficios VIP activados: Desayuno incluido, Servicio 24h, Acceso a áreas VIP");
+        logger.info("Beneficios VIP activados: Desayuno incluido, Servicio 24h, Acceso a áreas VIP");
     }
 
     public boolean tieneDesayunoIncluido() {

@@ -1,11 +1,15 @@
 package com.hotelreservation.payment;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Implementación de pago por transferencia bancaria.
  * SRP: Responsabilidad única de procesar pagos por transferencia.
  * OCP: Puede agregarse sin modificar código existente.
  */
 public class PagoTransferenciaBancaria implements MetodoPago {
+    private static final Logger logger = LoggerFactory.getLogger(PagoTransferenciaBancaria.class);
     private String numeroCuenta;
     private String nombreBanco;
     private String codigoBanco;
@@ -26,7 +30,7 @@ public class PagoTransferenciaBancaria implements MetodoPago {
             return false;
         }
         // En una aplicación real, se conectaría al sistema bancario
-        System.out.println("Procesando transferencia de $" + monto + " al banco " + nombreBanco);
+        logger.info("Procesando transferencia de $" + monto + " al banco " + nombreBanco);
         return true;
     }
 

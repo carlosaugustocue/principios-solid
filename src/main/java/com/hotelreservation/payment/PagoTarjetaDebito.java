@@ -1,11 +1,15 @@
 package com.hotelreservation.payment;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Implementación de pago con tarjeta de débito.
  * SRP: Responsabilidad única de procesar pagos con tarjeta de débito.
  * OCP: Puede extenderse o usarse sin modificar otras clases.
  */
 public class PagoTarjetaDebito implements MetodoPago {
+    private static final Logger logger = LoggerFactory.getLogger(PagoTarjetaDebito.class);
     private String numeroTarjeta;
     private String nombreTitular;
     private String PIN;
@@ -26,7 +30,7 @@ public class PagoTarjetaDebito implements MetodoPago {
             return false;
         }
         // En una aplicación real, se conectaría a un banco
-        System.out.println("Procesando pago de $" + monto + " con tarjeta de débito " +
+        logger.info("Procesando pago de $" + monto + " con tarjeta de débito " +
                           numeroTarjeta.substring(numeroTarjeta.length() - 4));
         return true;
     }

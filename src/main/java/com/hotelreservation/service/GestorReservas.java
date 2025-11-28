@@ -4,6 +4,8 @@ import com.hotelreservation.model.Habitacion;
 import com.hotelreservation.model.Reserva;
 import com.hotelreservation.model.Cliente;
 import com.hotelreservation.payment.MetodoPago;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
  * Actúa como un controlador central para crear, modificar y cancelar reservas.
  */
 public class GestorReservas {
+    private static final Logger logger = LoggerFactory.getLogger(GestorReservas.class);
     private List<Reserva> reservas;
     private List<Habitacion> habitacionesDisponibles;
 
@@ -30,7 +33,7 @@ public class GestorReservas {
      */
     public void registrarHabitacion(Habitacion habitacion) {
         habitacionesDisponibles.add(habitacion);
-        System.out.println("Habitación registrada: " + habitacion);
+        logger.info("Habitación registrada: " + habitacion);
     }
 
     /**
@@ -72,7 +75,7 @@ public class GestorReservas {
 
         Reserva reserva = new Reserva(cliente, habitaciones, checkIn, checkOut, metodoPago);
         reservas.add(reserva);
-        System.out.println("Reserva creada: " + reserva.getIdReserva());
+        logger.info("Reserva creada: " + reserva.getIdReserva());
         return reserva;
     }
 
@@ -96,7 +99,7 @@ public class GestorReservas {
         Reserva reservaVIP = new com.hotelreservation.model.ReservaVIP(cliente, habitaciones,
                 checkIn, checkOut, metodoPago);
         reservas.add(reservaVIP);
-        System.out.println("Reserva VIP creada: " + reservaVIP.getIdReserva());
+        logger.info("Reserva VIP creada: " + reservaVIP.getIdReserva());
         return reservaVIP;
     }
 

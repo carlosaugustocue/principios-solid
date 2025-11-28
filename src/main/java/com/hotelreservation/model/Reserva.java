@@ -1,6 +1,8 @@
 package com.hotelreservation.model;
 
 import com.hotelreservation.payment.MetodoPago;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import java.util.UUID;
  * DIP: Depende de la abstracción MetodoPago, no de implementaciones concretas.
  */
 public class Reserva {
+    private static final Logger logger = LoggerFactory.getLogger(Reserva.class);
     protected String idReserva;
     protected Cliente cliente;
     protected List<Habitacion> habitaciones;
@@ -92,7 +95,7 @@ public class Reserva {
         this.fechaCheckIn = nuevaFechaCheckIn;
         this.fechaCheckOut = nuevaFechaCheckOut;
         calcularMontoTotal();
-        System.out.println("Fechas de la reserva " + idReserva + " actualizadas exitosamente");
+        logger.info("Fechas de la reserva " + idReserva + " actualizadas exitosamente");
     }
 
     /**
@@ -114,7 +117,7 @@ public class Reserva {
         // Procesar pago
         if (metodoPago.procesarPago(montoTotal)) {
             this.estado = EstadoReserva.CONFIRMADA;
-            System.out.println("Reserva " + idReserva + " confirmada exitosamente");
+            logger.info("Reserva " + idReserva + " confirmada exitosamente");
         } else {
             // Liberar habitaciones si el pago falla
             for (Habitacion habitacion : habitaciones) {
@@ -138,7 +141,7 @@ public class Reserva {
         }
 
         this.estado = EstadoReserva.CANCELADA;
-        System.out.println("Reserva " + idReserva + " cancelada exitosamente");
+        logger.info("Reserva " + idReserva + " cancelada exitosamente");
     }
 
     @Override
